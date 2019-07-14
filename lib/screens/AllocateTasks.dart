@@ -30,7 +30,6 @@ class _AllocateTasksState extends State<AllocateTasks> {
         return AllocatedTasksDetails();
       },
       child: Scaffold(
-//        key: scaffoldKey,
         appBar: AppBar(
           centerTitle: true,
           title: Text('Allocate Tasks'),
@@ -40,33 +39,43 @@ class _AllocateTasksState extends State<AllocateTasks> {
           builder: (BuildContext context, AsyncSnapshot<AllData> snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
               AllData response = snapshot.data;
+              if(snapshot.hasError){
+                return Utils.errorScreen((){
+                  setState(() {
+
+                  });
+                });
+              }
               if (response.status == "ok") {
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      "Select tasks",
-                      style: TextStyle(fontSize: 25),
-                    ),
-                    TaskChoiceChip(
-                      tasks: response.result.tasks,
-                    ),
-                    Text(
-                      "Select assets",
-                      style: TextStyle(fontSize: 25),
-                    ),
-                    AssetChoiceChip(
-                      assets: response.result.assets,
-                    ),
-                    Text(
-                      "Select worker",
-                      style: TextStyle(fontSize: 25),
-                    ),
-                    WorkersChoiceChip(
-                      workers: response.result.workers,
-                    ),
-                    SelectDays()
-                  ],
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        "Select Task",
+                        style: TextStyle(fontSize: 25),
+                      ),
+                      TaskChoiceChip(
+                        tasks: response.result.tasks,
+                      ),
+                      Text(
+                        "Select Asset",
+                        style: TextStyle(fontSize: 25),
+                      ),
+                      AssetChoiceChip(
+                        assets: response.result.assets,
+                      ),
+                      Text(
+                        "Select Worker",
+                        style: TextStyle(fontSize: 25),
+                      ),
+                      WorkersChoiceChip(
+                        workers: response.result.workers,
+                      ),
+                      SelectDays()
+                    ],
+                  ),
                 );
               } else {
                 return Center(
@@ -84,7 +93,7 @@ class _AllocateTasksState extends State<AllocateTasks> {
               return Center(
                 child: CircularProgressIndicator(
                   valueColor:
-                      AlwaysStoppedAnimation<Color>(Colors.indigoAccent),
+                      AlwaysStoppedAnimation<Color>(Colors.blue),
                 ),
               );
             }
@@ -97,7 +106,7 @@ class _AllocateTasksState extends State<AllocateTasks> {
                 topLeft: Radius.circular(20),
                 topRight: Radius.circular(20),
               ),
-              color: Colors.indigoAccent,
+              color: Colors.blue,
             ),
             child: Align(
               alignment: Alignment.bottomRight,
@@ -292,7 +301,8 @@ class _SelectDaysState extends State<SelectDays> {
               (tasksInfo.days > 1) ? tasksInfo.days-- : tasksInfo.days = 0;
             });
           },
-        )
+        ),
+        Text("days")
       ],
     );
   }

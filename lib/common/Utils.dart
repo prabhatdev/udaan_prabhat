@@ -16,12 +16,22 @@ class Utils{
   }
   static Widget errorScreen(Function f){
     return Center(
-        child: InkWell(
-            onTap: f(),
-            child: Padding(
-              padding: const EdgeInsets.all(32.0),
-              child: Text("Hey there! Looks like our overpaid "
-                  "engineers messed up!-Poor Interns\n Tap to retry"),
-            )));
+        child: Padding(
+          padding: const EdgeInsets.all(32.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: <Widget>[
+              Text("Hey there! Looks like our overpaid "
+                  "engineers messed up!-Poor Interns",
+                textAlign: TextAlign.center,style: TextStyle(fontSize: 30),),
+            RaisedButton(
+              child: Text("Retry"),
+              onPressed: (){
+                f();
+              },
+            )
+            ],
+          ),
+        ));
   }
 }

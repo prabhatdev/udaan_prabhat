@@ -24,7 +24,11 @@ class _WorkersPageState extends State<WorkersPage> {
         if (snapshot.connectionState == ConnectionState.done) {
 
           if(snapshot.hasError){
-            return Utils.errorScreen(setState);
+            return Utils.errorScreen((){
+              setState(() {
+
+              });
+            });
           }
           WorkerModel response = snapshot.data;
           if (response.status == "ok") {
@@ -32,7 +36,8 @@ class _WorkersPageState extends State<WorkersPage> {
               itemBuilder: (BuildContext context, int index) {
                 return ListTile(
                   leading: Icon(Icons.person),
-                  title: Text(response.result[index].workerName),
+                  title: Text("${response.result[index].workerName} "
+                      "ID-${response.result[index].workerId}"),
                   subtitle:Text(response.result[index].skills) ,
                 );
               },

@@ -27,7 +27,10 @@ class _TasksPageState extends State<TasksPage> {
         if (snapshot.connectionState == ConnectionState.done) {
 
           if(snapshot.hasError){
-            return Utils.errorScreen(setState);
+            return Utils.errorScreen((){
+              setState(() {
+              });
+            });
           }
           TasksModel response = snapshot.data;
           if (response.status == "ok") {

@@ -41,6 +41,8 @@ class _LoginPageState extends State<LoginPage> {
               ),
               IconButton(
                 icon: Icon(Icons.keyboard_arrow_right),
+                highlightColor: Colors.grey,
+                iconSize: 70,
                 onPressed: () {
                   viewModel.verifyId(controller.text).then((response) {
                     if (response.status == "ok") {
@@ -66,7 +68,7 @@ class _LoginPageState extends State<LoginPage> {
                 },
               ),
               Text(
-                "Id- 01234 for admin login",
+                "ID- 01234 for admin login",
                 style: TextStyle(fontSize: 20),
               )
             ],

@@ -23,7 +23,10 @@ class _AssetsPageState extends State<AssetsPage> {
         if (snapshot.connectionState == ConnectionState.done) {
 
           if(snapshot.hasError){
-            return Utils.errorScreen(setState);
+            return Utils.errorScreen((){
+              setState(() {
+              });
+            });
           }
           AssetsModel response = snapshot.data;
           if (response.status == "ok") {
