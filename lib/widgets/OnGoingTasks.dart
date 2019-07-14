@@ -17,20 +17,23 @@ class OnGoingTasks extends StatelessWidget {
         child: Column(
           children: <Widget>[
             ListTile(
-              title: Text(task.taskName,style: TextStyle(fontSize: 25),),
+              title: Text(
+                task.taskName,
+                style: TextStyle(fontSize: 25),
+              ),
               isThreeLine: true,
-              subtitle: Text("${task.assetName} by -${task.workerName} \n"
-                  "Added on ${DateFormat("yyyy-MM-dd hh:mm").format(
-                  DateTime.fromMillisecondsSinceEpoch(
-                      int.parse(task.allocationTime)))} \nCompletion Date ${DateFormat("yyyy-MM-dd hh:mm").format(
-                  DateTime.fromMillisecondsSinceEpoch(
-                      int.parse(task.toBeCompleted)))}",style: TextStyle
-                (fontSize: 15),),
-              trailing: (DateTime.now().millisecondsSinceEpoch>int.parse(task
-                  .toBeCompleted))?Icon(Icons.check_circle,color: Colors
-                  .green,):Icon(Icons.close),
-
-
+              subtitle: Text(
+                "${task.assetName} by -${task.workerName} \n"
+                "Added on ${DateFormat("yyyy-MM-dd hh:mm").format(DateTime.fromMillisecondsSinceEpoch(int.parse(task.allocationTime)))} \nCompletion Date ${DateFormat("yyyy-MM-dd hh:mm").format(DateTime.fromMillisecondsSinceEpoch(int.parse(task.toBeCompleted)))}",
+                style: TextStyle(fontSize: 15),
+              ),
+              trailing: (DateTime.now().millisecondsSinceEpoch >
+                      int.parse(task.toBeCompleted))
+                  ? Icon(
+                      Icons.check_circle,
+                      color: Colors.green,
+                    )
+                  : Icon(Icons.close),
             )
           ],
         ),
